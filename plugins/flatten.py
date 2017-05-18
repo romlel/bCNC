@@ -24,7 +24,7 @@ class Flatten:
 
 	#----------------------------------------------------------------------
 	def make(self,app, XStart=0.0, YStart=0.0, FlatWidth=10., FlatHeight=10., \
-			FlatDepth=0, BorderPass=False, CutDirection="Climb", PocketType="Raster"):
+			FlatDepth=0, BorderPass=False, CutDirection="Climb", PocketType="Raster", ToolWidthOverride=-1):
 
 		#GCode Blocks
 		blocks = []
@@ -57,6 +57,7 @@ class Flatten:
 
 		# Load tool and material settings
 		toolDiam = CNC.vars['diameter']
+		if(ToolWidthOverride>0): toolDiam=ToolWidthOverride
 		toolRadius = toolDiam / 2.
 
 		#Calc tool diameter with Maximum Step Over allowed
@@ -254,6 +255,7 @@ class Tool(Plugin):
 		self.group = "CAM"
 		self.variables = [
 			("name",           "db",    "", _("Name")),
+			("ToolWidthOverride"  ,       "mm",   -1.0, _("Tool width Override")),
 			("XStart"  ,       "mm",   0.0, _("X start")),
 			("YStart"  ,       "mm",   0.0, _("Y start")),
 			("FlatWidth" ,     "mm",   30.0, _("Width to flatten")),
@@ -279,7 +281,8 @@ class Tool(Plugin):
 				self.fromMm("FlatDepth"),
 				self["BorderPass"],
 				self["CutDirection"],
-				self["PocketType"]
+				self["PocketType"],
+				self.fromMm("ToolWidthOverride")
 				)
 
 		if blocks is not None:
