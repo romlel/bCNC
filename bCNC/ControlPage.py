@@ -36,7 +36,7 @@ _NOZSTEP = 'XY'
 _HIGHASTEP = 90.0
 _NOASTEP = 'BC'
 
-OVERRIDES = ["Feed", "Rapid", "Spindle"]
+OVERRIDES = ["Feed", "Rapid", "Extra", "Spindle"]
 
 
 #===============================================================================
@@ -1745,9 +1745,12 @@ class StateFrame(CNCRibbon.PageExLabelFrame):
 	def overrideComboChange(self):
 		n = self.overrideCombo.get()
 		if n=="Rapid":
-			self.overrideScale.config(to_=100, resolution=25)
+			self.overrideScale.config(from_=25, to_=100, resolution=25)
+		elif n=="Extra":
+			self.overrideScale.config(from_=0, to_=500, resolution=1)
 		else:
-			self.overrideScale.config(to_=200, resolution=1)
+			self.overrideScale.config(from_=25, to_=200, resolution=1)
+
 		self.override.set(CNC.vars["_Ov"+n])
 
 	#----------------------------------------------------------------------
