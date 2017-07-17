@@ -30,7 +30,7 @@ _LOWSTEP   = 0.0001
 _HIGHSTEP  = 1000.0
 _HIGHZSTEP = 10.0
 
-OVERRIDES = ["Feed", "Rapid", "Spindle"]
+OVERRIDES = ["Feed", "Rapid", "Extra", "Spindle"]
 
 #===============================================================================
 # Connection Group
@@ -1012,9 +1012,11 @@ class StateFrame(CNCRibbon.PageExLabelFrame):
 	def overrideComboChange(self):
 		n = self.overrideCombo.get()
 		if n=="Rapid":
-			self.overrideScale.config(to_=100, resolution=25)
+			self.overrideScale.config(from_=25, to_=100, resolution=25)
+		elif n=="Extra":
+			self.overrideScale.config(from_=0, to_=500, resolution=1)
 		else:
-			self.overrideScale.config(to_=200, resolution=1)
+			self.overrideScale.config(from_=25, to_=200, resolution=1)
 
 		self.override.set(CNC.vars["_Ov"+n])
 
