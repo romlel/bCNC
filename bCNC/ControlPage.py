@@ -695,10 +695,10 @@ class ControlFrame(CNCRibbon.PageExLabelFrame):
 		frame.pack(side=TOP, fill=X)
 
 		row,col = 0,0
-		Label(frame, text=_("Z")).grid(row=row, column=col)
+		Label(frame, text=_("Y")).grid(row=row, column=col)
 
 		col += 3
-		Label(frame, text=_("Y")).grid(row=row, column=col)
+		Label(frame, text=_("Z")).grid(row=row, column=col)
 
 		# ---
 		row += 1
@@ -707,41 +707,48 @@ class ControlFrame(CNCRibbon.PageExLabelFrame):
 		width=3
 		height=2
 
-		b = Button(frame, text=Unicode.BLACK_UP_POINTING_TRIANGLE,
-					command=self.moveZup,
-					width=width, height=height,
-					activebackground="LightYellow")
-		b.grid(row=row, column=col, sticky=EW)
-		tkExtra.Balloon.set(b, _("Move +Z"))
-		self.addWidget(b)
+		#b = Button(frame, text=Unicode.BLACK_UP_POINTING_TRIANGLE,
+		#			command=self.moveZup,
+		#			width=width, height=height,
+		#			activebackground="LightYellow")
+		#b.grid(row=row, column=col, sticky=EW)
+		#tkExtra.Balloon.set(b, _("Move +Z"))
+		#self.addWidget(b)
 
 		col += 2
-		b = Button(frame, text=Unicode.UPPER_LEFT_TRIANGLE,
-					command=self.moveXdownYup,
+		#b = Button(frame, text=Unicode.UPPER_LEFT_TRIANGLE,
+		#			command=self.moveXdownYup,
+		#			width=width, height=height,
+		#			activebackground="LightYellow")
+#
+		#b.grid(row=row, column=col, sticky=EW)
+		#tkExtra.Balloon.set(b, _("Move -X +Y"))
+		#self.addWidget(b)
+
+		col += 1
+		#b = Button(frame, text=Unicode.BLACK_UP_POINTING_TRIANGLE,
+		#			command=self.moveYup,
+		#			width=width, height=height,
+		#			activebackground="LightYellow")
+		#b.grid(row=row, column=col, sticky=EW)
+		#tkExtra.Balloon.set(b, _("Move +Y"))
+		#self.addWidget(b)
+		b = Button(frame, text=Unicode.BLACK_RIGHT_POINTING_TRIANGLE,
+					command=self.moveXup,
 					width=width, height=height,
 					activebackground="LightYellow")
-
 		b.grid(row=row, column=col, sticky=EW)
-		tkExtra.Balloon.set(b, _("Move -X +Y"))
+		tkExtra.Balloon.set(b, _("Move +X"))
 		self.addWidget(b)
 
 		col += 1
-		b = Button(frame, text=Unicode.BLACK_UP_POINTING_TRIANGLE,
-					command=self.moveYup,
-					width=width, height=height,
-					activebackground="LightYellow")
-		b.grid(row=row, column=col, sticky=EW)
-		tkExtra.Balloon.set(b, _("Move +Y"))
-		self.addWidget(b)
-
-		col += 1
-		b = Button(frame, text=Unicode.UPPER_RIGHT_TRIANGLE,
-					command=self.moveXupYup,
-					width=width, height=height,
-					activebackground="LightYellow")
-		b.grid(row=row, column=col, sticky=EW)
-		tkExtra.Balloon.set(b, _("Move +X +Y"))
-		self.addWidget(b)
+		#b = Button(frame, text=Unicode.UPPER_RIGHT_TRIANGLE,
+		#			command=self.moveXupYup,
+		#			width=width, height=height,
+		#			activebackground="LightYellow")
+		#b.grid(row=row, column=col, sticky=EW)
+		#tkExtra.Balloon.set(b, _("Move +X +Y"))
+		#self.addWidget(b)
 
 		col += 2
 		b = Button(frame, text=u"\u00D710",
@@ -768,12 +775,12 @@ class ControlFrame(CNCRibbon.PageExLabelFrame):
 		Label(frame, text=_("X"), width=3, anchor=E).grid(row=row, column=col, sticky=E)
 
 		col += 1
-		b = Button(frame, text=Unicode.BLACK_LEFT_POINTING_TRIANGLE,
-					command=self.moveXdown,
+		b = Button(frame, text=Unicode.BLACK_DOWN_POINTING_TRIANGLE,
+					command=self.moveZdown,
 					width=width, height=height,
 					activebackground="LightYellow")
 		b.grid(row=row, column=col, sticky=EW)
-		tkExtra.Balloon.set(b, _("Move -X"))
+		tkExtra.Balloon.set(b, _("Move -Z"))
 		self.addWidget(b)
 
 		col += 1
@@ -786,12 +793,12 @@ class ControlFrame(CNCRibbon.PageExLabelFrame):
 		self.addWidget(b)
 
 		col += 1
-		b = Button(frame, text=Unicode.BLACK_RIGHT_POINTING_TRIANGLE,
-					command=self.moveXup,
+		b = Button(frame, text=Unicode.BLACK_UP_POINTING_TRIANGLE,
+					command=self.moveZup,
 					width=width, height=height,
 					activebackground="LightYellow")
 		b.grid(row=row, column=col, sticky=EW)
-		tkExtra.Balloon.set(b, _("Move +X"))
+		tkExtra.Balloon.set(b, _("Move +Z"))
 		self.addWidget(b)
 
 		# --
@@ -810,13 +817,13 @@ class ControlFrame(CNCRibbon.PageExLabelFrame):
 		try:
 			zstep = Utils.config.get("Control","zstep")
 			self.zstep = tkExtra.Combobox(frame, width=4, background=tkExtra.GLOBAL_CONTROL_BACKGROUND)
-			self.zstep.grid(row=row, column=0, columnspan=1, sticky=EW)
-			self.zstep.set(zstep)
-			zsl = [_NOZSTEP]
-			zsl.extend(map(float, Utils.config.get("Control","zsteplist").split()))
-			self.zstep.fill(zsl)
-			tkExtra.Balloon.set(self.zstep, _("Step for Z move operation"))
-			self.addWidget(self.zstep)
+		#	self.zstep.grid(row=row, column=0, columnspan=1, sticky=EW)
+		#	self.zstep.set(zstep)
+		#	zsl = [_NOZSTEP]
+		#	zsl.extend(map(float, Utils.config.get("Control","zsteplist").split()))
+		#	self.zstep.fill(zsl)
+		#	tkExtra.Balloon.set(self.zstep, _("Step for Z move operation"))
+		#	self.addWidget(self.zstep)
 		except:
 			self.zstep = self.step
 
@@ -840,40 +847,48 @@ class ControlFrame(CNCRibbon.PageExLabelFrame):
 		row += 1
 		col = 0
 
-		b = Button(frame, text=Unicode.BLACK_DOWN_POINTING_TRIANGLE,
-					command=self.moveZdown,
-					width=width, height=height,
-					activebackground="LightYellow")
-		b.grid(row=row, column=col, sticky=EW)
-		tkExtra.Balloon.set(b, _("Move -Z"))
-		self.addWidget(b)
+		#b = Button(frame, text=Unicode.BLACK_DOWN_POINTING_TRIANGLE,
+		#			command=self.moveZdown,
+		#			width=width, height=height,
+		#			activebackground="LightYellow")
+		#b.grid(row=row, column=col, sticky=EW)
+		#tkExtra.Balloon.set(b, _("Move -Z"))
+		#self.addWidget(b)
 
 		col += 2
-		b = Button(frame, text=Unicode.LOWER_LEFT_TRIANGLE,
-					command=self.moveXdownYdown,
-					width=width, height=height,
-					activebackground="LightYellow")
-		b.grid(row=row, column=col, sticky=EW)
-		tkExtra.Balloon.set(b, _("Move -X -Y"))
-		self.addWidget(b)
+		#b = Button(frame, text=Unicode.LOWER_LEFT_TRIANGLE,
+		#			command=self.moveXdownYdown,
+		#			width=width, height=height,
+		#			activebackground="LightYellow")
+		#b.grid(row=row, column=col, sticky=EW)
+		#tkExtra.Balloon.set(b, _("Move -X -Y"))
+		#self.addWidget(b)
 
 		col += 1
-		b = Button(frame, text=Unicode.BLACK_DOWN_POINTING_TRIANGLE,
-					command=self.moveYdown,
+		#b = Button(frame, text=Unicode.BLACK_DOWN_POINTING_TRIANGLE,
+		#			command=self.moveYdown,
+		#			width=width, height=height,
+		#			activebackground="LightYellow")
+		#b.grid(row=row, column=col, sticky=EW)
+		#tkExtra.Balloon.set(b, _("Move -Y"))
+		#self.addWidget(b)
+		b = Button(frame, text=Unicode.BLACK_LEFT_POINTING_TRIANGLE,
+					command=self.moveXdown,
 					width=width, height=height,
 					activebackground="LightYellow")
 		b.grid(row=row, column=col, sticky=EW)
-		tkExtra.Balloon.set(b, _("Move -Y"))
+		tkExtra.Balloon.set(b, _("Move -X"))
 		self.addWidget(b)
 
+
 		col += 1
-		b = Button(frame, text=Unicode.LOWER_RIGHT_TRIANGLE,
-					command=self.moveXupYdown,
-					width=width, height=height,
-					activebackground="LightYellow")
-		b.grid(row=row, column=col, sticky=EW)
-		tkExtra.Balloon.set(b, _("Move +X -Y"))
-		self.addWidget(b)
+		#b = Button(frame, text=Unicode.LOWER_RIGHT_TRIANGLE,
+		#			command=self.moveXupYdown,
+		#			width=width, height=height,
+		#			activebackground="LightYellow")
+		#b.grid(row=row, column=col, sticky=EW)
+		#tkExtra.Balloon.set(b, _("Move +X -Y"))
+		#self.addWidget(b)
 
 		col += 2
 		b = Button(frame, text=u"\u00F710",

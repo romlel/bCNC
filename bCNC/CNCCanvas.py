@@ -2010,7 +2010,7 @@ class CanvasFrame(Frame):
 		self.draw_workarea.set(bool(int(Utils.getBool("Canvas", "workarea",True))))
 		#self.draw_camera.set(  bool(int(Utils.getBool("Canvas", "camera",  False))))
 
-		self.view.set(Utils.getStr("Canvas", "view", VIEWS[0]))
+		self.view.set(Utils.getStr("Canvas", "view", VIEWS[1]))
 
 		DRAW_TIME     = Utils.getInt("Canvas", "drawtime",     DRAW_TIME)
 
