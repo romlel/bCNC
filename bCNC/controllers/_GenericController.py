@@ -88,14 +88,10 @@ class _GenericController:
 		self.master.sio_status = True
 
 	def viewParameters(self):
-		#rlel NO REPORTS
-		#self.master.sendGCode("$#")
-		print("RLEL NO PARAMETERS")
+		self.master.sendGCode("$#")
 
 	def viewState(self): #Maybe rename to viewParserState() ???
-		#rlel NO REPORTS
-		#self.master.sendGCode("$G")
-		print("RLEL NO REPORTS")
+		self.master.sendGCode("$G")
 
 	#----------------------------------------------------------------------
 	def jog(self, dir):
